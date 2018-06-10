@@ -13,7 +13,7 @@ export class UserAccountCreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  createContact(){
+  createUserAccount(){
 
 var  user  = {
     userName:  "tomas",
@@ -22,7 +22,7 @@ var  user  = {
     vehicle:  "Seat"
 
 };
-this.apiService.createContact(user).subscribe((response) => {
+this.apiService.createUserAccount(user).subscribe((response) => {
     console.log(response);
 });
 
