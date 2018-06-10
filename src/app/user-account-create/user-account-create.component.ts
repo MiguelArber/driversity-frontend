@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { APIService } from  '../api.service';
+import { ApiService } from  '../api.service';
 
 @Component({
   selector: 'app-user-account-create',
@@ -8,7 +8,7 @@ import { APIService } from  '../api.service';
 })
 export class UserAccountCreateComponent implements OnInit {
 
-  constructor(private  apiService:  APIService) { }
+  constructor(private  apiService:  ApiService) { }
 
   ngOnInit() {
   }
@@ -27,4 +27,5 @@ this.apiService.createUserAccount(user).subscribe((response) => {
 });
 
 
+}
 }
