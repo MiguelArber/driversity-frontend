@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from  '../api.service';
+import { APIService  } from  '../api.service';
 
 @Component({
   selector: 'app-user-account',
@@ -9,7 +9,7 @@ import { ApiService } from  '../api.service';
 export class UserAccountComponent implements OnInit {
 
   private  account:  Array<object> = []
-  constructor(private  apiService:  ApiService) { }
+  constructor(private  apiService:  APIService ) { }
 
   ngOnInit() {
     this.getUserAccount();
