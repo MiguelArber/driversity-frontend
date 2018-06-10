@@ -9,6 +9,8 @@ import { UserAccountCreateComponent } from './user-account-create/user-account-c
 import { MatchListComponent } from './match-list/match-list.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { HttpClientModule } from  '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
