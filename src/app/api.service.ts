@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, Response   } from  '@angular/common/http';
+import { HttpClient   } from  '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,9 @@ export class APIService  {
   getUserAccount(){
 
       return  this.httpClient.get(`${this.API_URL}/user/15`,{ observe: 'response',responseType :'json' });
+
+
+}
 
 
 }
