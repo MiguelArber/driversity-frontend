@@ -21,8 +21,7 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            // firstName: ['', Validators.required],
-            // lastName: ['', Validators.required],
+
             username: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(6)]],
             email: ['', ''],
@@ -37,7 +36,6 @@ export class RegisterComponent implements OnInit {
             price: ['', ''],
             campus: ['', '']
         });
-        console.log("Antes del submit");
     }
 
     // convenience getter for easy access to form fields
@@ -51,26 +49,17 @@ export class RegisterComponent implements OnInit {
         }
 
         var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        var body = "username=" + this.registerForm.controls.username.value + "&email=" + this.registerForm.controls.email.value + "&password=" + this.registerForm.controls.password.value + "&timeFlex=" + this.registerForm.controls.timeFlex.value + "&locationFlex=" + this.registerForm.controls.locationFlex.value + "&lat=" + this.registerForm.controls.lat.value
+        var body = "&username=" + this.registerForm.controls.username.value + "&email=" + this.registerForm.controls.email.value + "&password=" + this.registerForm.controls.password.value + "&timeFlex=" + this.registerForm.controls.timeFlex.value + "&locationFlex=" + this.registerForm.controls.locationFlex.value + "&lat=" + this.registerForm.controls.lat.value
         + "&lon=" + this.registerForm.controls.lon.value + "&locationName=" + this.registerForm.controls.locationName.value + "&type=" + this.registerForm.controls.type.value + "&model=" + this.registerForm.controls.model.value + "&seats=" + this.registerForm.controls.seats.value + "&price=" + this.registerForm.controls.price.value + "&campus=" + this.registerForm.controls.campus.value;
-        console.log(body);
         this.httpClient.post("http://127.0.0.1:8000/user/new", JSON.stringify(body),{ headers: reqHeader }).subscribe((data) => {
-          //Hacer algo aquí
+          this.loading = true;
+          this.alertService.success('Registration successful', true);
+          this.router.navigate(['/login']);
+        },error => {
+          this.alertService.error(error);
+          this.loading = false;
+          });
 
-        });
 
-        //TODO
-        // this.loading = true;
-        // this.userService.register(this.registerForm.value)
-        //     .pipe(first())
-        //     .subscribe(
-        //         data => {
-        //             this.alertService.success('Registration successful', true);
-        //             this.router.navigate(['/login']);
-        //         },
-        //         error => {
-        //             this.alertService.error(error);
-        //             this.loading = false;
-        //         });
     }
 }
