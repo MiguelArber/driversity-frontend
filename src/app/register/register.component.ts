@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { HttpClient   } from  '@angular/common/http';
+import { HttpClient,HttpHeaders   } from  '@angular/common/http';
 
 import { AlertService, UserService } from '../_services';
 
@@ -50,12 +50,11 @@ export class RegisterComponent implements OnInit {
             return;
         }
 
-
+        var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
         var body = "username=" + this.registerForm.controls.username.value + "&email=" + this.registerForm.controls.email.value + "&password=" + this.registerForm.controls.password.value + "&timeFlex=" + this.registerForm.controls.timeFlex.value + "&locationFlex=" + this.registerForm.controls.locationFlex.value + "&lat=" + this.registerForm.controls.lat.value
         + "&lon=" + this.registerForm.controls.lon.value + "&locationName=" + this.registerForm.controls.locationName.value + "&type=" + this.registerForm.controls.type.value + "&model=" + this.registerForm.controls.model.value + "&seats=" + this.registerForm.controls.seats.value + "&price=" + this.registerForm.controls.price.value + "&campus=" + this.registerForm.controls.campus.value;
-
         console.log(body);
-        this.httpClient.post("http://127.0.0.1:8000/user/new", body).subscribe((data) => {
+        this.httpClient.post("http://127.0.0.1:8000/user/new", JSON.stringify(body),{ headers: reqHeader }).subscribe((data) => {
           //Hacer algo aquí
 
         });
