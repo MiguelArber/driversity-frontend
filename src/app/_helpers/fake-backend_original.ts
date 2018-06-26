@@ -1,45 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS, HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
 
-    // constructor() { }
-    constructor(private http: HttpClient) { }
+    constructor() { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
-        let response;
-        console.log("ENTRA 1");
-        if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
-          console.log("username=" + request.body.username + "&password=" + request.body.password);
 
-          /* Use this for real authentication
-            ----------------------------------------------*/
-            var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-            reqHeader.append('Access-Control-Allow-Origin','*');
-           this.http.post('http://127.0.0.1:8000/login', { username: request.body.username, password: request.body.password },{ headers: reqHeader })
-           .subscribe(
-               data => console.log(data),
-               err => console.log(err)
-             );
-
-        //   var data = "username=" + request.body.username + "&password=" + request.body.password;
-        //   var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','Access-Control-Allow-Origin' : '*' });
-        // this.http.post('http://127.0.0.1:8000/login', data, { headers: reqHeader }).subscribe(
-        //     data => console.log(data),
-        //     err => console.log(err)
-        //   );
-        }
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
             // authenticate
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
-            console.log("Entra");
                 // find if any user matches login credentials
                 let filteredUsers = users.filter(user => {
                     return user.username === request.body.username && user.password === request.body.password;
@@ -138,7 +115,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // pass through any requests not handled above
             return next.handle(request);
-
+            
         }))
 
         // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)

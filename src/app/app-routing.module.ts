@@ -6,7 +6,6 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { AuthGuard } from './_guards';
 import { UserAccountComponent } from './user-account/user-account.component';
-import { UserAccountCreateComponent } from './user-account-create/user-account-create.component';
 import { MatchListComponent } from './match-list/match-list.component';
 
 
@@ -18,10 +17,6 @@ const routes: Routes = [
   {
       path:  'account',
       component:  UserAccountComponent
-  },
-  {
-    path:  'create-account',
-    component:  UserAccountCreateComponent
   },
   {
       path:  'match',

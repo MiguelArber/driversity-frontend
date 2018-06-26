@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { UserAccountComponent } from './user-account/user-account.component';
-import { UserAccountCreateComponent } from './user-account-create/user-account-create.component';
 import { MatchListComponent } from './match-list/match-list.component';
 
 import { AlertComponent } from './_directives';
@@ -25,7 +24,6 @@ import { RegisterComponent } from './register';
   declarations: [
     AppComponent,
     UserAccountComponent,
-    UserAccountCreateComponent,
     MatchListComponent,
     AlertComponent,
     HomeComponent,
